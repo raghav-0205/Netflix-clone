@@ -9,29 +9,42 @@ import Login from './pages/Login'
 import { useState } from 'react'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [user , setuser] = useState(localStorage.getItem('user')  || {
+    email: '',
+    password: '',
+    isLoggedIn: false
+  })
 
+
+  
+
+  console.log(user.isLoggedIn)
   return (
     <BrowserRouter>
-      {isLoggedIn && <Navbar />} 
+      {user.isLoggedIn && <Navbar user= {user} />} 
       
       <Routes>
-        {!isLoggedIn ? (
+        <Route path="/" element={!user.isLoggedIn && (<Navigate to="/login" />)} />
+        {!user.isLoggedIn && <Route path="/login" element={<Login setuser = {setuser} />} />}
+        <Route path="/browse" element={<Home />} />
+        <Route path="/TV" element={<Tvshows />} />
+        <Route path="/Movies" element={<Movies />} />
+        {/* {!isLoggedIn ? (
           <>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           </>
         ) : (
           <>
-            <Route path="/" element={<Navigate to="/browse" />} />
+            <Route path="/login" element={<Navigate to="/browse" />} />
             <Route path="/browse" element={<Home />} />
             <Route path="/TV" element={<Tvshows />} />
             <Route path="/Movies" element={<Movies />} />
           </>
-        )}
+        )} */}
       </Routes>
 
-      {isLoggedIn && <Footer />} 
+      {user.isLoggedIn && <Footer />} 
     </BrowserRouter>
   )
 }

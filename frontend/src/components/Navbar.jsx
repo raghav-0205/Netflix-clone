@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { FaMagnifyingGlass, FaRegBell } from "react-icons/fa6";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { easeInOut, hover, motion } from "framer-motion";
 
-function Navbar() {
+function Navbar({user}) {
   const [profileSpaceOpen, setProfileSpaceOpen] = useState(false);
   const [searchOpen , setsearchOpen ] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -12,6 +12,11 @@ function Navbar() {
 
   const handleChange = (e)=>{
     setSearchInput(e.target.value)
+  }
+
+  const signOut = () => {
+    localStorage.setItem("user", JSON.stringify({email: user.email, password: user.password, isLoggedIn: false}));
+    window.location.href = "/login"
   }
 
   return (
@@ -94,7 +99,7 @@ function Navbar() {
                     <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">Profile 2</li>
                     <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">Profile 3</li>
                     <hr className="border-gray-900" />
-                    <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer text-red-400">
+                    <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer text-red-400" onClick={signOut}>
                       Sign Out
                     </li>
                   </ul>
