@@ -25,7 +25,7 @@ function App() {
       
       <Routes>
         <Route path="/" element={!user.isLoggedIn && (<Navigate to="/login" />)} />
-        {!user.isLoggedIn && <Route path="/login" element={<Login setuser = {setuser} />} />}
+        {!user.isLoggedIn && <Route path="/login" element={<Login setuser={setuser}/>} />}
         <Route path="/browse" element={<Home />} />
         <Route path="/TV" element={<Tvshows />} />
         <Route path="/Movies" element={<Movies />} />
