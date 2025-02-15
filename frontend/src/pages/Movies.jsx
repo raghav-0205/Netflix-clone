@@ -2,7 +2,7 @@ import React from 'react'
 
 function Movies() {
   return (
-    <div>
+    <div  className='bg-[#121212] h-screen w-screen text-white p-8'>
       Movies
     </div>
   )

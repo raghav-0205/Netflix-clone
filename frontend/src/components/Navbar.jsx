@@ -1,22 +1,26 @@
-import React, { useState } from "react";
-import { NavLink} from "react-router-dom";
+import React, { useState, useContext  } from "react";
+import { NavLink , useNavigate} from "react-router-dom";
 import { FaMagnifyingGlass, FaRegBell } from "react-icons/fa6";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { easeInOut, hover, motion } from "framer-motion";
+import userContext from "../contexts/userContext";
 
-function Navbar({user}) {
+function Navbar() {
   const [profileSpaceOpen, setProfileSpaceOpen] = useState(false);
   const [searchOpen , setsearchOpen ] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [notiOpen , setnotiOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e)=>{
     setSearchInput(e.target.value)
   }
+  const { user, setuser } = useContext(userContext);
 
   const signOut = () => {
-    localStorage.setItem("user", JSON.stringify({email: user.email, password: user.password, isLoggedIn: false}));
-    window.location.href = "/login"
+    setuser({ ...user, isLoggedIn: false });
+    localStorage.setItem('user', JSON.stringify({ ...user, isLoggedIn: false }));
+    navigate('/signin');
   }
 
   return (
