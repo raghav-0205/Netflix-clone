@@ -25,8 +25,9 @@ function Navbar() {
 
   return (
     <>
+      {(user.isLoggedIn) ? (
       <nav className="w-screen h-[4vw] flex items-center justify-between py-1 bg-[#141414] opacity-98 text-white">
-        <div className="flex gap-5 items-center">
+       <div className="flex gap-5 items-center">
           <NavLink to="/browse">
             <img src="images/netflix-logo.png" alt="Netflix Logo" className="h-16 ml-8 mb-2" />
           </NavLink>
@@ -71,8 +72,6 @@ function Navbar() {
             </>
           )}
           
-          
-
           <div
             className="flex items-center hover:cursor-pointer"
             onMouseEnter={() => setProfileSpaceOpen(true)}
@@ -111,8 +110,10 @@ function Navbar() {
               </>
             )}
           </div>
-        </div>
-      </nav>
+        </div> 
+      </nav>) : (<nav className="w-screen h-[3vh] absolute z-10 top-0 left-0 bg-transparent text-white">
+        <img src="images/netflix-logo.png" alt="Netflix Logo" className="h-25 ml-50 " />
+      </nav>)}
     </>
   );
 }
