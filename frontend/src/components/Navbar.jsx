@@ -24,7 +24,7 @@ function Navbar() {
   }
 
   return (
-    <>
+    <div className="fixed top-0 z-20 left-0">
       {(user.isLoggedIn) ? (
       <nav className="w-screen h-[4vw] flex items-center justify-between py-1 bg-[#141414] opacity-98 text-white">
        <div className="flex gap-5 items-center">
@@ -114,7 +114,7 @@ function Navbar() {
       </nav>) : (<nav className="w-screen h-[3vh] absolute z-10 top-0 left-0 bg-transparent text-white">
         <img src="images/netflix-logo.png" alt="Netflix Logo" className="h-25 ml-50 " />
       </nav>)}
-    </>
+    </div>
   );
 }
 

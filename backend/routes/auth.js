@@ -5,10 +5,10 @@ import db from "../db.js";
 
 const { sign } = pkg;   
 
-const router = Router();
+const auth = Router();
 const SECRET_KEY = process.env.JWT_SECRET || "your_secret_key";
 
-router.post("/signup", async (req, res) => {
+auth.post("/signup", async (req, res) => {
     const { id, name, email, password } = req.body;
     
     db.query("SELECT * FROM users WHERE email = ?", [email], async (err, results) => {
@@ -28,7 +28,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // User Login
-router.post("/signin", (req, res) => {
+auth.post("/signin", (req, res) => {
     const { email, password } = req.body;
 
     // Check if user exists
@@ -50,4 +50,4 @@ router.post("/signin", (req, res) => {
 });
 
 
-export default router;
+export default auth;

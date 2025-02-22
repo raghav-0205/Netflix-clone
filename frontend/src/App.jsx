@@ -3,13 +3,14 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Tvshows from './pages/Tvshows';
 import Movies from './pages/Movies';
-import Home from './pages/home';
+import Home from './pages/Home';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Mylist from './pages/Mylist';
 import Category from './pages/Category';
 import { useState, useEffect } from 'react';
 import userContext from './contexts/userContext';
+import { MovieProvider } from './contexts/moviesContext.jsx';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   return (
     
       <BrowserRouter>
+        <MovieProvider>
         <userContext.Provider value={{ user, setuser}}>
         <Navbar /> 
 
@@ -40,6 +42,7 @@ function App() {
         {user.isLoggedIn && <Footer />} 
       
         </userContext.Provider>
+        </MovieProvider>
       </BrowserRouter>
  
   );
