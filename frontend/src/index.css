@@ -1,4 +1,30 @@
 @import "tailwindcss";
 html, body {
     overflow-x: hidden;
-  }
+}
+::-webkit-scrollbar {
+  width: 10px; /* Scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background: #262626; /* Track background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f3f; /* Scrollbar color */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker on hover */
+}
+
+/* Smooth scrolling for better experience */
+html {
+  scroll-behavior: smooth;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
