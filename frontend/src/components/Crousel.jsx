@@ -26,15 +26,14 @@ function Crousel({ data }) {
   }, [data]);
 
   return (
-    <div className="relative h-[70vh] mt-[2.5vh] w-full">
-      <iframe
+    <div className="bg-[#141414] relative h-[70vh] mt-[7.9vh] w-full">
+      <iframe 
         className="absolute top-0 left-0 w-full h-full object-cover"
         src={`https://www.youtube.com/embed/${video}?autoplay=1&mute=0&loop=1&playlist=${video}&controls=0&modestbranding=1&rel=0`}
         allow="autoplay; encrypted-media; fullscreen"
-        allowFullScreen
       ></iframe>
 
-      <div className="absolute inset-0 flex flex-col justify-center pl-10 md:pl-20 text-white max-w-xl">
+      <div className="absolute bg-gradient-to-r from-[#000000]  via-[#0000008e] via-80% to-100% to-transparent inset-0 flex flex-col justify-center pl-10 md:pl-20 text-white max-w-[40%]">
         <h1 className="text-5xl font-bold">{data.title}</h1>
         <p className="mt-4 text-lg">{data.overview}</p>
         
