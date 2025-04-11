@@ -4,17 +4,16 @@ import { FaMagnifyingGlass, FaRegBell } from "react-icons/fa6";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { easeInOut, hover, motion } from "framer-motion";
 import userContext from "../contexts/userContext";
+import Search from "./Search";
 
 function Navbar() {
   const [profileSpaceOpen, setProfileSpaceOpen] = useState(false);
   const [searchOpen , setsearchOpen ] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
+  
   const [notiOpen , setnotiOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e)=>{
-    setSearchInput(e.target.value)
-  }
+
   const { user, setuser } = useContext(userContext);
 
   const signOut = () => {
@@ -26,7 +25,7 @@ function Navbar() {
   return (
     <div className="fixed top-0 z-20 left-0">
       {(user.isLoggedIn) ? (
-      <nav className="w-screen h-[4vw] flex items-center justify-between py-1 bg-[#141414] opacity-98 text-white">
+      <nav className="w-screen h-[4vw] flex items-center justify-between py-1 bg-[#151515] opacity-98 text-white">
        <div className="flex gap-5 items-center">
           <NavLink to="/browse">
             <img src="images/netflix-logo.png" alt="Netflix Logo" className="h-16 ml-8 mb-2" />
@@ -35,24 +34,14 @@ function Navbar() {
             <NavLink to={"/browse"} className={({isActive}) => `${isActive ? "font-bold" : "" } hover:text-gray-300`}><li>Home</li></NavLink>
             <NavLink to={"/Tv"} className={({isActive}) => `${isActive ? "font-bold" : "" } hover:text-gray-300`}><li>TV Shows</li></NavLink>
             <NavLink to={"/Movies"} className={({isActive}) => `${isActive ? "font-bold" : "" } hover:text-gray-300`}><li>Movies</li></NavLink>
-            <NavLink to={"/my list"} className={({isActive}) => `${isActive ? "font-bold" : "" } hover:text-gray-300`}><li>My List</li></NavLink>
-            <NavLink to={"/category"}className={({isActive}) => `${isActive ? "font-bold" : "" } hover:text-gray-300`}><li>Category</li></NavLink>
+            <NavLink to={"/mylist"} className={({isActive}) => `${isActive ? "font-bold" : "" } hover:text-gray-300`}><li>My List</li></NavLink>
           </ul>
         </div>
 
         <div className={`flex justify-end ${searchOpen ? "gap-5": "gap-8"} items-center mr-[5rem]`}>
           
           {searchOpen ? (
-            <motion.div
-                initial={{ opacity: 0, x: 0 }}
-                animate={{ opacity: 1, x: -10 }}
-                exit={{ opacity: 0, x: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="flex"
-              >
-                <span className={`${searchOpen ? "bg-[#181818] p-1": ""} rounded-tl-sm rounded-bl-sm border-t border-l border-b border-[#262626]`}><FaMagnifyingGlass className={`hover:cursor-pointer m-auto`} size={20} onClick={()=>setsearchOpen(!searchOpen)}/></span>
-                  <input type="text" value={searchInput} placeholder="Search for a movie or TV show" className="w-[20vw] h-[3vh] p-4 text-sm text-gray-300 rounded-tr-sm rounded-br-sm bg-[#181818] opacity-98 outline-none border border-[#262626]" autoFocus onBlur={()=> setsearchOpen(!searchOpen)} onChange={handleChange}/>
-            </motion.div>
+            <Search setsearchOpen={setsearchOpen} searchOpen={searchOpen} />
           ): (<FaMagnifyingGlass className={`hover:cursor-pointer `} size={23} onClick={()=>setsearchOpen(!searchOpen)}/>)}
            
            <FaRegBell className="hover:cursor-pointer" size={23} onClick={()=>setnotiOpen(!notiOpen)} onMouseEnter={()=> setnotiOpen(true)}/>

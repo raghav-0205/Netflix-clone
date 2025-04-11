@@ -8,10 +8,10 @@ export default function Footer() {
     <footer className="bg-[#141414] text-gray-400 p-8 w-screen">
         <div className="max-w-6xl mx-auto">
           <div className="flex space-x-6 mb-4">
-            <Link to="/browse" className="text-xl"><FaFacebook /></Link>
-            <Link to="/browse" className="text-xl"><FaInstagram/></Link>
-            <Link to="/browse" className="text-xl"><FaSquareXTwitter/></Link>
-            <Link to="/browse" className="text-xl"><FaYoutube/></Link>
+            <Link to="/browse" className="text-xl hover:text-white"><FaFacebook /></Link>
+            <Link to="/browse" className="text-xl hover:text-white"><FaInstagram/></Link>
+            <Link to="/browse" className="text-xl hover:text-white"><FaSquareXTwitter/></Link>
+            <Link to="/browse" className="text-xl hover:text-white"><FaYoutube/></Link>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">

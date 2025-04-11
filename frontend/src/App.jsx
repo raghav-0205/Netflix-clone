@@ -7,7 +7,6 @@ import Home from './pages/Home';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Mylist from './pages/Mylist';
-import Category from './pages/Category';
 import { useState, useEffect } from 'react';
 import userContext from './contexts/userContext';
 import { MovieProvider } from './contexts/moviesContext.jsx';
@@ -36,7 +35,6 @@ function App() {
           {user.isLoggedIn && <Route path="/TV" element={<Tvshows />} />}
           {user.isLoggedIn && <Route path="/Movies" element={<Movies />} />}
           {user.isLoggedIn && <Route path="/mylist" element={<Mylist />} />}
-          {user.isLoggedIn && <Route path="/category" element={<Category />} />}
         </Routes>
 
         {user.isLoggedIn && <Footer />} 
