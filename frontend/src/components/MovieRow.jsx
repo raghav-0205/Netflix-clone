@@ -1,15 +1,17 @@
 import React, { useState, useContext, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaPlay, FaInfoCircle } from "react-icons/fa";
-import { FaCaretRight, FaCaretLeft } from "react-icons/fa6";
+import { FaPlay, FaInfoCircle , FaChevronRight ,FaChevronLeft } from "react-icons/fa";
+import MovieDetails from "./MoviesDetails";
 
 function MovieRow({data}) {
   const [hoveredMovie, setHoveredMovie] = useState(null);
+  const [showInfo, setShowInfo] = useState(false);
+  const [movieId, setMovieId] = useState(null);
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = 300; 
+      const scrollAmount = 1000; 
       if (direction === "left") {
         scrollRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
       } else {
@@ -18,14 +20,20 @@ function MovieRow({data}) {
     }
   };
 
+  const toggleInfo = (id) => {
+    setMovieId(id);
+    setShowInfo(!showInfo);
+  }
+
   return (
+    <>
     <div className="w-full px-6 relative">
       <div ref={scrollRef} className="flex overflow-x-auto gap-4 scrollbar-hide whitespace-nowrap scroll-smooth">
         <span
-          className="absolute content-center top-1/2 left-0 transform -translate-y-1/2 cursor-pointer z-10 h-full w-10 rounded-sm bg-[#0f0f0fac] flex items-center justify-center"
+          className="absolute content-center top-1/2 left-0 transform -translate-y-1/2 cursor-pointer z-10 h-full w-16 rounded-sm bg-[#0f0f0f70] flex items-center justify-center hover:bg-[#000000b7]"
           onClick={() => scroll("left")}
         >
-          <FaCaretLeft className="h-5 text-white" />
+          <FaChevronLeft className="h-5 text-white" />
         </span>
 
         {data.map((movie) => (
@@ -52,10 +60,17 @@ function MovieRow({data}) {
                 <h3 className="font-bold text-lg">{movie.title}</h3>
 
                 <div className="flex gap-3 mt-3">
-                  <button className="bg-white text-black px-3 py-1 rounded flex items-center gap-1 hover:bg-gray-300 cursor-pointer">
+                  <button 
+                    className="bg-white text-black px-3 py-1 rounded flex items-center gap-1 hover:bg-gray-300 cursor-pointer"
+                    onClick={() => toggleInfo(movie.id)}
+                  >
                     <FaPlay className="w-5 h-5" /> Play
                   </button>
-                  <button className="bg-gray-700 px-3 py-1 rounded flex items-center gap-1 hover:bg-gray-600 cursor-pointer">
+                  <button 
+                    className="bg-neutral-700 px-3 py-1 rounded flex items-center gap-1 hover:bg-neutral-600 cursor-pointer" 
+                    onClick={() => toggleInfo(movie.id)}
+                  >
+
                     <FaInfoCircle className="w-5 h-5" /> More Info
                   </button>
                 </div>
@@ -63,17 +78,23 @@ function MovieRow({data}) {
             )}
           </div>
         ))}
-
-       
         <span
-          className="absolute content-center top-1/2 right-0 transform -translate-y-1/2 cursor-pointer z-10 h-full w-10 rounded-sm bg-[#0f0f0fac] flex items-center justify-center"
+          className="absolute content-center top-1/2 right-0 transform -translate-y-1/2 cursor-pointer z-10 h-full w-16 rounded-sm bg-[#0f0f0f70] flex items-center justify-center hover:bg-[#000000b7]"
           onClick={() => scroll("right")}
         >
-          <FaCaretRight className="h-5 text-white" />
+          <FaChevronRight className="h-5 text-white" />
         </span>
       </div>
+
+     
     </div>
+    {showInfo && movieId && ( 
+      <MovieDetails movieID={movieId} onClose={toggleInfo}/>
+    )}
+    </>
   );
 }
 
 export default MovieRow;
+
+

@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BsFillInfoSquareFill } from "react-icons/bs";
+import MoviesDetails from "./MoviesDetails";
+
 function Crousel({ data }) {
   const [video, setvideo] = useState("");
+  const [showinfo , setshowinfo] = useState(false);
 
   console.log(data);
   console.log(video);
+
+  const toggleInfo = ()=>{
+    setshowinfo(!showinfo);
+  }
 
   const url = `https://api.themoviedb.org/3/movie/${data.id}/videos?language=en-US`;
   const headers = {
@@ -26,6 +33,7 @@ function Crousel({ data }) {
   }, [data]);
 
   return (
+    <>
     <div className="bg-[#141414] relative h-[70vh] mt-[7.9vh] w-full">
       <iframe 
         className="absolute top-0 left-0 w-full h-full object-cover"
@@ -38,12 +46,16 @@ function Crousel({ data }) {
         <p className="mt-4 text-lg">{data.overview}</p>
         
         <div className="mt-6 flex gap-4">
-          <button className="bg-gray-600 bg-opacity-50 px-6 py-3 text-lg font-semibold rounded-md flex items-center gap-2 hover:bg-gray-700 hover:cursor-pointer transition">
+          <button className="bg-gray-600 bg-opacity-50 px-6 py-3 text-lg font-semibold rounded-md flex items-center gap-2 hover:bg-gray-700 hover:cursor-pointer transition"
+          onClick={toggleInfo}
+          >
             <BsFillInfoSquareFill/> More Info
           </button>
         </div>
       </div>
     </div>
+    {showinfo && <MoviesDetails movieID={data.id} onClose={toggleInfo}/>}
+    </>
   );
 }
 

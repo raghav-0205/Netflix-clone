@@ -1,12 +1,26 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
+import MoviesDetails from "./MoviesDetails";
 
 
 
 const MovieCard = ({movie}) => {
+  const [showInfo, setShowInfo] = useState(false);
+  const [currMovie ,setMovie] = useState([])
+  console.log(currMovie)
 
-  // console.log(movie);
+  useEffect(()=>{
+    setMovie(movie);
+  },[showInfo]);
+
+  const toggleInfo = () =>{
+    setShowInfo(!showInfo);
+  }
+
   return (
-    <div className="relative w-52 h-72 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:scale-105">
+    <>
+    <div className="relative w-52 h-72 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:scale-105"
+    onClick={() => setShowInfo(true)}
+    >
       <img
         src= {`https://image.tmdb.org/t/p/original/${movie.poster_path}`}        
         alt= "img"
@@ -16,6 +30,10 @@ const MovieCard = ({movie}) => {
         <h3 className="text-white text-center text-lg bg-[#000000a2] w-full font-semibold p-2">{movie.title}</h3>
       </div>
     </div>
+    {showInfo && (
+      <MoviesDetails movieID ={currMovie.id} onClose= {toggleInfo} />
+    )}
+    </>
   );
 };
 
